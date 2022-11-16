@@ -3,9 +3,6 @@ const callbackController = require('./../controllers/callbackController');
 
 const router = express.Router();
 
-router
-  .route('/')
-  .get(callbackController.getCallback)
-  .post(callbackController.postCallback);
+router.route('/').post(callbackController.postCallback);
 
 module.exports = router;
