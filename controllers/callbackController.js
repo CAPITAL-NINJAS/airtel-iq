@@ -1,6 +1,5 @@
 const catchAsync = require('../utils/catchAsync');
 const AppError = require('../utils/appError');
-const { scryptSync, timingSafeEqual, randomBytes } = require('crypto');
 
 exports.postCallback = catchAsync(async (req, res, next) => {
   let authHeader;

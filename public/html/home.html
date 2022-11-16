@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400&display=swap" rel="stylesheet">
+
+    <!-- Icon -->
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+
+    <!-- Css -->
+    <link rel="stylesheet" href="../css/style.css">
+
+    <title>Capital Ninjas</title>
+</head>
+
+<body>
+    <header class="header">
+        <h1>Capital &nbsp; Ninjas</h1>
+    </header>
+
+    <main class="main">
+        <p class="main__callback">Callback url: <span class="callback-post"><a href="https://www.postman.com/"
+                    target="_blank">POST</a></span>
+            <input type="text" value="https://capital-ninjas.onrender.com/api/v1/callback" id="callback-input"
+                class="callback-input" readonly />
+            <button class="callback-copy">
+                <span class="material-symbols-outlined" onclick="copyUrl()">
+                    content_copy
+                </span>
+            </button>
+        </p>
+
+        <div class="main__curl">
+            <p class="curl-details">
+            <p class="curl-name">curl</p>
+            <p class="curl-location">--location --request POST
+                'https://capital-ninjas.onrender.com/api/v1/callback'
+                \</p>
+            <p class="curl-header">
+                --header 'Authorization: Basic <span class="curl-variable">&lt;auth-token&gt;</span>'
+                \
+                <br>
+                --header 'Content-Type: application/json' \
+            </p>
+            <p class="curl-data">
+                --data-raw '<span class="curl-variable">&lt;raw data in json&gt;</span>'
+            </p>
+            </p>
+        </div>
+    </main>
+
+    <script>
+        function copyUrl() {
+            let copyText = document.getElementById("callback-input");
+
+            copyText.select();
+            copyText.setSelectionRange(0, 99999);
+
+            navigator.clipboard.writeText(copyText.value);
+
+            alert("Text Copied !");
+        }
+    </script>
+</body>
+
+</html>

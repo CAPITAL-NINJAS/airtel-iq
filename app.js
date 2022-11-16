@@ -1,3 +1,4 @@
+const path = require('path');
 const express = require('express');
 const morgan = require('morgan');
 
@@ -10,7 +11,14 @@ const globalErrorHandler = require('./controllers/errorController');
 const app = express();
 app.enable('trust-proxy');
 
+// Setting view engine
+app.set('view engine', 'pug');
+app.set('views', path.join(__dirname, 'views'));
+
 // 1.) Global Middlewares
+
+// Serving static files
+app.use(express.static(path.join(__dirname, 'public')));
 
 // Development logging
 if (process.env.NODE_ENV === 'development') {
@@ -23,7 +31,7 @@ app.use(express.urlencoded({ extended: true }));
 
 // Test Route
 app.get('/', (req, res, next) => {
-  res.status(200).send('OK');
+  res.status(200).render('home');
 });
 
 // 2.) Routes

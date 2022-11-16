@@ -1,0 +1,53 @@
+doctype html
+head
+  meta(charset='UTF-8')
+  meta(http-equiv='X-UA-Compatible' content='IE=edge')
+  meta(name='viewport' content='width=device-width, initial-scale=1.0')
+  // Google Fonts
+  link(rel='preconnect' href='https://fonts.googleapis.com')
+  link(rel='preconnect' href='https://fonts.gstatic.com' crossorigin='')
+  link(href='https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap' rel='stylesheet')
+  link(href='https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400&display=swap' rel='stylesheet')
+  // Icon
+  link(rel='stylesheet' href='https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0')
+  // Css
+  link(rel='stylesheet' href='../css/style.css')
+  title Capital Ninjas
+header.header
+  h1 Capital &nbsp; Ninjas
+main.main
+  p.main__callback
+    | Callback url: 
+    span.callback-post
+      a(href='https://www.postman.com/' target='_blank') POST
+    input#callback-input.callback-input(type='text' value='https://capital-ninjas.onrender.com/api/v1/callback' readonly='')
+    button.callback-copy
+      span.material-symbols-outlined(onclick='copyUrl()')
+        | content_copy
+  .main__curl
+    p.curl-details
+    p.curl-name curl
+    p.curl-location
+      | --location --request POST
+      | &apos;https://capital-ninjas.onrender.com/api/v1/callback&apos;
+      | \
+    p.curl-header
+      | --header &apos;Authorization: Basic 
+      span.curl-variable &lt;auth-token&gt;
+      | &apos;
+      |                 \
+      br
+      |                 --header &apos;Content-Type: application/json&apos; \
+    p.curl-data
+      | --data-raw &apos;
+      span.curl-variable &lt;raw data in json&gt;
+      | &apos;
+    p
+script.
+  function copyUrl() {
+  let copyText = document.getElementById("callback-input");
+  copyText.select();
+  copyText.setSelectionRange(0, 99999);
+  navigator.clipboard.writeText(copyText.value);
+  alert("Text Copied !");
+  }
