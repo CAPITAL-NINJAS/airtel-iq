@@ -1,11 +1,3 @@
-const AppError = require('./../utils/appError');
-
-const handleJWTError = () =>
-  new AppError('Invalid token. Please login again!', 401);
-
-const handleJWTExpiredError = () =>
-  new AppError('Your token has expired. Please login again!', 401);
-
 const sendErrorDev = (err, req, res) => {
   // API
   if (req.originalUrl.startsWith('/api')) {
@@ -47,10 +39,7 @@ const sendErrorProd = (err, req, res) => {
     // RENDERED WEBSITE
     // Operational, trusted error: send message to client
     if (err.isOperational) {
-      res.status(err.statusCode).render('error', {
-        title: 'Something went wrong!',
-        msg: err.message,
-      });
+      res.status(err.statusCode).send('🎇 OOPS! An Error Occured');
 
       // Programming or other unknown error: don't leak error details
     } else {
@@ -58,10 +47,7 @@ const sendErrorProd = (err, req, res) => {
       console.error('ERROR 🎇', err);
 
       // 2.) Send Generic Message
-      res.status(err.statusCode).render('error', {
-        title: 'Something went wrong!',
-        msg: 'Please try again later',
-      });
+      res.status(err.statusCode).send('🎇 Something went wrong');
     }
   }
 };
@@ -75,14 +61,6 @@ module.exports = (err, req, res, next) => {
   } else if (process.env.NODE_ENV === 'production') {
     let error = { ...err };
     error.message = err.message;
-
-    if (error.name === 'JsonWebTokenError') {
-      error = handleJWTError();
-    }
-
-    if (error.name === 'TokenExpiredError') {
-      error = handleJWTExpiredError();
-    }
 
     sendErrorProd(error, req, res);
   }
