@@ -23,6 +23,8 @@ exports.postCallback = catchAsync(async (req, res, next) => {
   if (key == process.env.API_KEY && secret == process.env.API_SECRET) {
     const data = req.body;
 
+    console.log(data);
+
     res.status(200).json({
       status: 'success',
       data,
