@@ -11,9 +11,15 @@ const customerSchema = new mongoose.Schema({
     trim: true,
   },
   address: {
-    country: {
+    country: String,
+    state: String,
+    city: String,
+    description: {
       type: String,
-      //   Test Commit
+      trim: true,
+    },
+    pincode: {
+      type: Number,
     },
   },
   email: {
@@ -22,9 +28,27 @@ const customerSchema = new mongoose.Schema({
     lowercase: true,
     validate: [validator.isEmail, 'Please provide a valid email address'],
   },
+  mobile_no: {
+    type: Number,
+    unique: true,
+  },
+  pan_no: {
+    type: String,
+    unique: true,
+    maxlength: 10,
+  },
+  aadhar_no: {
+    type: Number,
+    unique: true,
+  },
+  dob: Date,
   photo: {
     type: String,
     default: 'default.jpg',
+  },
+  created_at: {
+    type: Date,
+    default: Date.now(),
   },
 });
 

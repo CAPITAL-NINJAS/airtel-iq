@@ -3,9 +3,12 @@ const express = require('express');
 const morgan = require('morgan');
 
 // Requiring files
-const callbackRouter = require('./routes/callbackRoutes');
 const AppError = require('./utils/appError');
 const globalErrorHandler = require('./controllers/errorController');
+const callbackRouter = require('./routes/callbackRoutes');
+const customerRouter = require('./routes/customerRoutes');
+const accountRouter = require('./routes/accountRoutes');
+const transactionRouter = require('./routes/transactionRoutes');
 
 // Start Express App
 const app = express();
@@ -36,6 +39,9 @@ app.get('/', (req, res, next) => {
 
 // 2.) Routes
 app.use('/api/v1/callback', callbackRouter);
+app.use('/api/v1/customers', customerRouter);
+app.use('/api/v1/accounts', accountRouter);
+app.use('/api/v1/transactions', transactionRouter);
 
 app.all('*', function (req, res, next) {
   next(
