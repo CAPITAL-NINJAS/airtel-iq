@@ -6,7 +6,7 @@ exports.postCallback = catchAsync(async (req, res, next) => {
 
   console.log(data);
 
-  if (data != {}) {
+  if (data) {
     getData(data);
   }
 

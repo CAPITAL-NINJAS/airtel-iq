@@ -23,19 +23,23 @@ exports.getData = async (data) => {
   const toMob = data.to;
   const message = data.message;
 
-  const options = {
-    sender: sessionId,
-    message: message.text.body,
-  };
+  if (sessionId && fromMob && toMob && message) {
+    const options = {
+      sender: sessionId,
+      message: message.text.body,
+    };
 
-  const res = await connectRasa(options);
+    const res = await connectRasa(options);
 
-  const response = {
-    sessionId,
-    fromMob,
-    toMob,
-    message: res.text,
-  };
+    if (res) {
+      const response = {
+        sessionId,
+        fromMob,
+        toMob,
+        message: res.text,
+      };
 
-  sendWhatsapp(response);
+      sendWhatsapp(response);
+    }
+  }
 };
