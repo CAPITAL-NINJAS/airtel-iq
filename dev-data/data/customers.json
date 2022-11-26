@@ -1,3 +1,152 @@
 [
-    {}
+  {
+    "_id": "638072b3bc69104488a60512",
+    "first_name": "user1",
+    "last_name": "surnmame1",
+    "address": {
+      "country": "India",
+      "state": "Maharashtra",
+      "city": "Pune",
+      "description": "Pune is a beautiful city"
+    },
+    "email": "user1@gmail.com",
+    "mobile_no": 987654320,
+    "dob": "21-04-2002",
+    "photo": "user1.jpg"
+  },
+  {
+    "_id": "638072b3bc69104488a60513",
+    "first_name": "user2",
+    "last_name": "surname2",
+    "address": {
+      "country": "India",
+      "state": "Karnataka",
+      "city": "Bangalore",
+      "description": "Bangalore is a smart city"
+    },
+    "email": "user2@gmail.com",
+    "mobile_no": 987654325,
+    "dob": "21-03-2003",
+    "photo": "user2.jpg"
+  },
+  {
+    "_id": "638072b3bc69104488a60514",
+    "first_name": "user3",
+    "last_name": "surname3",
+    "address": {
+      "country": "India",
+      "state": "Maharashtra",
+      "city": "Nashik",
+      "description": "Nashik is a big city"
+    },
+    "email": "user3@gmail.com",
+    "mobile_no": 987653323,
+    "dob": "21-02-2004",
+    "photo": "user3.jpg"
+  },
+  {
+    "_id": "638072b3bc69104488a60515",
+    "first_name": "user4",
+    "last_name": "surname4",
+    "address": {
+      "country": "India",
+      "state": "Maharashtra",
+      "city": "Pune",
+      "description": "Pune is a small city"
+    },
+    "email": "user4@gmail.com",
+    "mobile_no": 987654322,
+    "dob": "21-03-2005",
+    "photo": "user4.jpg"
+  },
+  {
+    "_id": "638072b3bc69104488a60518",
+    "first_name": "user5",
+    "last_name": "surname5",
+    "address": {
+      "country": "India",
+      "state": "MP",
+      "city": "indore",
+      "description": "indore is foodies city"
+    },
+    "email": "user5@gmail.com",
+    "mobile_no": 987654321,
+    "dob": "23-04-2006",
+    "photo": "user5.jpg"
+  },
+  {
+    "_id": "638072b3bc69104488a60519",
+    "first_name": "user6",
+    "last_name": "surname6",
+    "address": {
+      "country": "India",
+      "state": "AP",
+      "city": "amravati",
+      "description": "amravati is foodies city"
+    },
+    "email": "user6@gmail.com",
+    "mobile_no": 987654323,
+    "dob": "27-04-2009",
+    "photo": "user6.jpg"
+  },
+  {
+    "_id": "638072b3bc69104488a6051b",
+    "first_name": "user7",
+    "last_name": "surname7",
+    "address": {
+      "country": "India",
+      "state": "Jammu",
+      "city": "shimla",
+      "description": "shimla is snow city"
+    },
+    "email": "user7@gmail.com",
+    "mobile_no": 987654311,
+    "dob": "23-05-2006",
+    "photo": "user7.jpg"
+  },
+  {
+    "_id": "638072b3bc69104488a6051a",
+    "first_name": "user8",
+    "last_name": "surname8",
+    "address": {
+      "country": "India",
+      "state": "Talengana",
+      "city": "hyderbad",
+      "description": "hyderabad is tech city"
+    },
+    "email": "user8@gmail.com",
+    "mobile_no": 987656321,
+    "dob": "21-05-2004",
+    "photo": "user8.jpg"
+  },
+  {
+    "_id": "638072b3bc69104488a60516",
+    "first_name": "user9",
+    "last_name": "surname9",
+    "address": {
+      "country": "India",
+      "state": "Maharashtra",
+      "city": "satara",
+      "description": "satara is small city"
+    },
+    "email": "user9@gmail.com",
+    "mobile_no": 886654321,
+    "dob": "20-04-2006",
+    "photo": "user9.jpg"
+  },
+  {
+    "_id": "638072b3bc69104488a60517",
+    "first_name": "user10",
+    "last_name": "surname10",
+    "address": {
+      "country": "India",
+      "state": "Karnataka",
+      "city": "dharwad",
+      "description": "dharwad is famous for dosa"
+    },
+    "email": "user10@gmail.com",
+    "mobile_no": 777654321,
+    "dob": "19-04-2006",
+    "photo": "user10.jpg"
+  }
 ]

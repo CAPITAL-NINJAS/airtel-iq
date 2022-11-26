@@ -1,3 +1,62 @@
 [
-    {}
+    {
+        "_id": "638072b4bc69104488a60535",
+        "customer_id": "638072b3bc69104488a60512",
+        "balance": 20000,
+        "account_type": "Savings"
+    },
+    {
+        "_id": "638072b4bc69104488a60534",
+        "customer_id": "638072b3bc69104488a60513",
+        "balance": 40000,
+        "account_type": "Current"
+    },
+    {
+        "_id": "638072b4bc69104488a60538",
+        "customer_id": "638072b3bc69104488a60514",
+        "balance": 65000,
+        "account_type": "Salary"
+    },
+    {
+        "_id": "638072b4bc69104488a6053a",
+        "customer_id": "638072b3bc69104488a60515",
+        "balance": 150000,
+        "account_type": "Fixed Deposit"
+    },
+    {
+        "_id": "638072b4bc69104488a60539",
+        "customer_id": "638072b3bc69104488a60518",
+        "balance": 100000,
+        "account_type": "Savings"
+    },
+    {
+        "_id": "638072b4bc69104488a6053c",
+        "customer_id": "638072b3bc69104488a60519",
+        "balance": 38000,
+        "account_type": "Recurring Deposit"
+    },
+    {
+        "_id": "638072b4bc69104488a6053b",
+        "customer_id": "638072b3bc69104488a6051b",
+        "balance": 200000,
+        "account_type": "NRI"
+    },
+    {
+        "_id": "638072b4bc69104488a6053d",
+        "customer_id": "638072b3bc69104488a6051a",
+        "balance": 12500,
+        "account_type": "Current"
+    },
+    {
+        "_id": "638072b4bc69104488a60537",
+        "customer_id": "638072b3bc69104488a60516",
+        "balance": 58000,
+        "account_type": "NRI"
+    },
+    {
+        "_id": "638072b4bc69104488a60536",
+        "customer_id": "638072b3bc69104488a60517",
+        "balance": 900000,
+        "account_type": "Fixed Deposit"
+    }
 ]

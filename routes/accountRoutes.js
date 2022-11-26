@@ -3,6 +3,8 @@ const accountController = require('./../controllers/accountController');
 
 const router = express.Router();
 
+router.get('/:mob_no', accountController.getBalance);
+
 router
   .route('/')
   .get(accountController.getAllAccounts)

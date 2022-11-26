@@ -11,19 +11,11 @@ const accountSchema = new mongoose.Schema(
       type: String,
       unique: true,
       trim: true,
-      default: randomstring.generate({
-        length: 8,
-        charset: 'numeric',
-      }),
     },
     account_no: {
       type: String,
       trim: true,
       unique: true,
-      default: randomstring.generate({
-        length: 16,
-        charset: 'numeric',
-      }),
     },
     balance: {
       type: Number,
@@ -55,8 +47,22 @@ const accountSchema = new mongoose.Schema(
 
 accountSchema.pre(/^find/, function (next) {
   this.populate({
-    path: 'cutomer_id',
+    path: 'customer_id',
     select: 'first_name last_name email mobile_no',
+  });
+
+  next();
+});
+
+accountSchema.pre('save', function (next) {
+  this.custId = randomstring.generate({
+    length: 8,
+    charset: 'numeric',
+  });
+
+  this.account_no = randomstring.generate({
+    length: 16,
+    charset: 'numeric',
   });
 
   next();

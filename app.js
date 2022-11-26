@@ -9,6 +9,7 @@ const callbackRouter = require('./routes/callbackRoutes');
 const customerRouter = require('./routes/customerRoutes');
 const accountRouter = require('./routes/accountRoutes');
 const transactionRouter = require('./routes/transactionRoutes');
+const authRoutes = require('./routes/authRoutes');
 
 // Start Express App
 const app = express();
@@ -38,6 +39,7 @@ app.get('/', (req, res, next) => {
 });
 
 // 2.) Routes
+app.use('/api/v1/auth', authRoutes);
 app.use('/api/v1/callback', callbackRouter);
 app.use('/api/v1/customers', customerRouter);
 app.use('/api/v1/accounts', accountRouter);

@@ -6,7 +6,6 @@ const transactionSchema = new mongoose.Schema(
     transaction_id: {
       type: String,
       unique: true,
-      default: uuidv4(),
     },
     transaction_medium: {
       type: String,
@@ -65,6 +64,12 @@ const transactionSchema = new mongoose.Schema(
     toObject: { virtuals: true },
   }
 );
+
+transactionSchema.pre('save', function (next) {
+  this.transaction_id = uuidv4();
+
+  next();
+});
 
 transactionSchema.pre(/^find/, function (next) {
   this.populate({

@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const validator = require('validator');
+const randomstring = require('randomstring');
 
 const customerSchema = new mongoose.Schema({
   first_name: {
@@ -34,8 +35,8 @@ const customerSchema = new mongoose.Schema({
   },
   pan_no: {
     type: String,
-    unique: true,
     maxlength: 10,
+    unique: true,
   },
   aadhar_no: {
     type: Number,
@@ -50,6 +51,25 @@ const customerSchema = new mongoose.Schema({
     type: Date,
     default: Date.now(),
   },
+});
+
+customerSchema.pre('save', function (next) {
+  this.address.pincode = randomstring.generate({
+    length: 6,
+    charset: 'numeric',
+  });
+
+  this.pan_no = randomstring.generate({
+    length: 10,
+    charset: 'alphanumeric',
+  });
+
+  this.aadhar_no = randomstring.generate({
+    length: 16,
+    charset: 'numeric',
+  });
+
+  next();
 });
 
 const Customer = mongoose.model('Customer', customerSchema);
