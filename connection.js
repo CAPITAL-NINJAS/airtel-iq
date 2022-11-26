@@ -2,13 +2,28 @@ const axios = require('axios');
 const whatsapp = require('./whatsapp/whatsapp');
 
 const connectRasa = async (options) => {
-  const response = await axios
-    .post('http://127.0.0.1:5005/webhooks/rest/webhook', options, {
-      Headers: {
-        'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': '*',
-      },
-    })
+  //   const response = await axios
+  //     .post('http://127.0.0.1:5005/webhooks/rest/webhook', options, {
+  //       Headers: {
+  //         'Content-Type': 'application/json',
+  //         'Access-Control-Allow-Origin': '*',
+  //       },
+  //     })
+  //     .then((res) => {
+  //       console.log(res);
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+
+  const response = fetch('http://127.0.0.1:5005/webhooks/rest/webhook', {
+    method: 'POST',
+    mode: 'cors',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(options),
+  })
     .then((res) => {
       console.log(res);
     })
