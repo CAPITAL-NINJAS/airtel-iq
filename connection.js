@@ -1,4 +1,3 @@
-const axios = require('axios');
 const whatsapp = require('./whatsapp/whatsapp');
 
 const connectRasa = async (options) => {
