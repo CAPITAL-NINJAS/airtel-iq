@@ -23,7 +23,10 @@ exports.createSendOtp = catchAsync(async (req, res, next) => {
     numbers: [mobile],
   };
 
-  fast2sms
+  req.otp = otp;
+  res.locals.otp = otp;
+
+  await fast2sms
     .sendMessage(options)
     .then((response) => {
       console.log(response);
