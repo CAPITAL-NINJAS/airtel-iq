@@ -1,14 +1,30 @@
-const fast2sms = require('fast-two-sms');
-const otpGenerator = require('otp-generator');
+const fast2sms = require("fast-two-sms");
+const otpGenerator = require("otp-generator");
 
-const AppError = require('./../utils/appError');
-const catchAsync = require('./../utils/catchAsync');
+const AppError = require("./../utils/appError");
+const catchAsync = require("./../utils/catchAsync");
+
+exports.verifyOtp = catchAsync(async (req, res, next) => {
+  const uotp = req.body.otp;
+
+  if (!uotp) {
+    return next(new AppError("Please provide a otp number", 400));
+  }
+
+  const votp = req.otp;
+
+  console.log(req.otp);
+  if (uotp != votp) {
+    return next(new AppError("Otp match not found, Provide a valid otp", 404));
+  }
+  res.status(200).json({ status: "success", message: "otp verifies" });
+});
 
 exports.createSendOtp = catchAsync(async (req, res, next) => {
   const mobile = req.body.mob_no;
 
   if (!mobile) {
-    next(new AppError('Please provide a mobile number', 400));
+    next(new AppError("Please provide a mobile number", 400));
   }
 
   const otp = otpGenerator.generate(6, {
@@ -32,13 +48,13 @@ exports.createSendOtp = catchAsync(async (req, res, next) => {
       console.log(response);
 
       res.status(200).json({
-        status: 'success',
-        message: 'SMS OTP Code Sent Successfully',
+        status: "success",
+        message: "SMS OTP Code Sent Successfully",
       });
     })
     .catch((err) => {
       res.status(400).json({
-        status: 'error',
+        status: "error",
         message: `Some error has taken place : ${err}`,
       });
     });
