@@ -2,13 +2,22 @@ const axios = require('axios');
 const whatsapp = require('./whatsapp/whatsapp');
 
 const connectRasa = async (options) => {
-  const response = await axios.post(
-    'http://127.0.0.1:5005/webhooks/rest/webhook',
-    options,
-    {
-      Proxy: false,
-    }
-  );
+  //   const response = await axios.post(
+  //     'http://127.0.0.1:5005/webhooks/rest/webhook',
+  //     options,
+  //     {
+  //       Proxy: false,
+  //     }
+  //   );
+
+  const response = await fetch('http://127.0.0.1:5005/webhooks/rest/webhook', {
+    method: 'POST',
+    mode: 'cors',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(options),
+  });
 
   return response;
 };
