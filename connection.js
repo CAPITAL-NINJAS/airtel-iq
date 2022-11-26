@@ -1,3 +1,1 @@
-exports.getData = (data) => {
-  console.log(data);
-};
+exports.getData = (data) => {};
