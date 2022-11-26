@@ -1,8 +1,8 @@
-const axios = require("axios");
-const catchAsync = require("./../utils/catchAsync");
-const dotenv = require("dotenv");
+const axios = require('axios');
+const catchAsync = require('./../utils/catchAsync');
+const dotenv = require('dotenv');
 
-dotenv.config({ path: "./../.env" });
+dotenv.config({ path: './../.env' });
 
 // 1)send text message to single recipient
 /*
@@ -15,10 +15,10 @@ dotenv.config({ path: "./../.env" });
     }
 }
 */
-exports.sendOneText = catchAsync(async (req, res, next) => {
+exports.sendOneText = catchAsync(async (options) => {
   const response = await axios.post(
-    "https://iqwhatsapp.airtel.in:443/gateway/airtel-xchange/basic/whatsapp-manager/v1/session/send/text",
-    req.body.options,
+    'https://iqwhatsapp.airtel.in:443/gateway/airtel-xchange/basic/whatsapp-manager/v1/session/send/text',
+    options,
     {
       auth: {
         username: process.env.KONG_USER,
@@ -27,10 +27,7 @@ exports.sendOneText = catchAsync(async (req, res, next) => {
     }
   );
 
-  res.status(200).json({
-    status: "success",
-    message: "Text message to single recipient has been sent",
-  });
+  return response;
 });
 
 // 2) send interactive message with list to single recipient
@@ -59,10 +56,10 @@ exports.sendOneText = catchAsync(async (req, res, next) => {
   }
 }
 */
-exports.sendInteractiveList = catchAsync(async (req, res, next) => {
+exports.sendInteractiveList = catchAsync(async (options) => {
   const response = await axios.post(
-    "https://iqwhatsapp.airtel.in:443/gateway/airtel-xchange/basic/whatsapp-manager/v1/session/send/interactive/list",
-    req.body.options,
+    'https://iqwhatsapp.airtel.in:443/gateway/airtel-xchange/basic/whatsapp-manager/v1/session/send/interactive/list',
+    options,
     {
       auth: {
         username: process.env.KONG_USER,
@@ -71,10 +68,7 @@ exports.sendInteractiveList = catchAsync(async (req, res, next) => {
     }
   );
 
-  res.status(200).json({
-    status: "success",
-    message: "Text interactive message list  to single recipient has been sent",
-  });
+  return response;
 });
 
 // 3)send interactive message with buttons to single recipient
@@ -105,10 +99,10 @@ exports.sendInteractiveList = catchAsync(async (req, res, next) => {
 
 */
 
-exports.sendInteractiveBtn = catchAsync(async (req, res, next) => {
+exports.sendInteractiveBtn = catchAsync(async (options) => {
   const response = await axios.post(
-    "https://iqwhatsapp.airtel.in:443/gateway/airtel-xchange/basic/whatsapp-manager/v1/session/send/interactive/buttons",
-    req.body.options,
+    'https://iqwhatsapp.airtel.in:443/gateway/airtel-xchange/basic/whatsapp-manager/v1/session/send/interactive/buttons',
+    options,
     {
       auth: {
         username: process.env.KONG_USER,
@@ -117,11 +111,7 @@ exports.sendInteractiveBtn = catchAsync(async (req, res, next) => {
     }
   );
 
-  res.status(200).json({
-    status: "success",
-    message:
-      "Text interactive message button to single recipient has been sent",
-  });
+  return response;
 });
 
 // 4)upload-media
@@ -135,9 +125,9 @@ data.append('file', fs.createReadStream('/path/to/file'));
 data.append('type', 'IMAGE');
 data.append('businessId', '<business-id>');
 */
-exports.UploadMedia = catchAsync(async (req, res, next) => {
+exports.UploadMedia = catchAsync(async (options) => {
   const response = await axios.post(
-    "https://iqwhatsapp.airtel.in:443/gateway/airtel-xchange/basic/whatsapp-manager/v1/session/media",
+    'https://iqwhatsapp.airtel.in:443/gateway/airtel-xchange/basic/whatsapp-manager/v1/session/media',
     req.body.options,
     {
       auth: {
@@ -147,17 +137,14 @@ exports.UploadMedia = catchAsync(async (req, res, next) => {
     }
   );
 
-  res.status(200).json({
-    status: "success",
-    message: "Media has been uploaded",
-  });
+  return response;
 });
 
 // 5)download media
 
-exports.DownloadMedia = catchAsync(async (req, res, next) => {
+exports.DownloadMedia = catchAsync(async (options) => {
   const response = await axios.get(
-    "https://iqwhatsapp.airtel.in:443/gateway/airtel-xchange/basic/whatsapp-manager/v1/download/media?mediaId=<media-id>&businessId=<business-id>",
+    'https://iqwhatsapp.airtel.in:443/gateway/airtel-xchange/basic/whatsapp-manager/v1/download/media?mediaId=<media-id>&businessId=<business-id>',
     req.body.options,
     {
       auth: {
@@ -167,8 +154,5 @@ exports.DownloadMedia = catchAsync(async (req, res, next) => {
     }
   );
 
-  res.status(200).json({
-    status: "success",
-    message: "Media has been downloaded",
-  });
+  return response;
 });
