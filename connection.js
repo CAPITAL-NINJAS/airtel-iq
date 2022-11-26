@@ -1,3 +1,4 @@
+const fetch = require('node-fetch');
 const whatsapp = require('./whatsapp/whatsapp');
 
 const connectRasa = async (options) => {
