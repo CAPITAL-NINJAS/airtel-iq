@@ -33,6 +33,11 @@ const customerSchema = new mongoose.Schema({
     type: Number,
     unique: true,
   },
+  otp: {
+    type: Number,
+    maxlength: 6,
+    unique: true,
+  },
   pan_no: {
     type: String,
     maxlength: 10,
