@@ -4,7 +4,10 @@ const whatsapp = require('./whatsapp/whatsapp');
 const connectRasa = async (options) => {
   const response = await axios.post(
     'http://127.0.0.1:5005/webhooks/rest/webhook',
-    options
+    options,
+    {
+      Proxy: false,
+    }
   );
 
   return response;
