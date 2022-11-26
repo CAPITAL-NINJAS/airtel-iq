@@ -1,9 +1,13 @@
+// const fs = require("fs");
+const xlsx = require("json-as-xlsx");
+const aspose = require("aspose.cells");
 const Account = require("../models/accountModel");
 const Customer = require("../models/customerModel");
 const Transaction = require("../models/transactionModel");
 const AppError = require("../utils/appError");
 const catchAsync = require("../utils/catchAsync");
 const factory = require("./handlerFactory");
+// var json2xls = require("json2xls");
 
 exports.getministatement = catchAsync(async (req, res, next) => {
   const mobile = req.params.mob_no;
@@ -18,12 +22,54 @@ exports.getministatement = catchAsync(async (req, res, next) => {
     return next(new AppError("Account not found", 404));
   }
 
-  const transaction = await Transaction.find({ from_account_no: account._id })
-    .limit(5)
-    .select("transaction_type transaction_medium transaction_status");
+  const transaction = await Transaction.find({
+    from_account_no: account._id,
+  }).limit(5);
   if (!user) {
     return next(new AppError("Transaction not found,404"));
   }
+  const data = [
+    {
+      sheet: "mini_statement",
+      columns: [
+        { label: "Transaction_Id", value: "transaction_id" },
+        { label: "Date", value: "date_issued" }, // Top level data
+        { label: "Type", value: "transaction_type" }, // Custom format
+        { label: "From_Acc", value: "from_account_no.account_no" },
+        { label: "To_Acc", value: "to_account_no.account_no" },
+        { label: "Medium", value: "transaction_medium" },
+
+        { label: "Status", value: "transaction_status" },
+        { label: "Amount", value: "amount" },
+        { label: "Balance", value: "from_account_no.balance" },
+
+        /*{
+          label: "Phone",
+          value: (row) => (row.more ? row.more.phone || "" : ""),
+        }, // Run functions*/
+      ],
+      content: transaction,
+    },
+  ];
+
+  const settings = {
+    fileName: "Mini_Statement", // Name of the resulting spreadsheet
+    extraLength: 3, // A bigger number means that columns will be wider
+    writeMode: "writeFile", // The available parameters are 'WriteFile' and 'write'. This setting is optional. Useful in such cases https://docs.sheetjs.com/docs/solutions/output#example-remote-file
+    writeOptions: {}, // Style options from https://github.com/SheetJS/sheetjs#writing-options
+    RTL: false, // Display the columns from right-to-left (the default value is false)
+  };
+
+  xlsx(data, settings);
+  // fs.writeFileSync("data.xlsx", xls, "binary");
+  var aspose = aspose || {};
+
+  // load a workbook
+  var workbook = aspose.cells.Workbook("Mini_Statement.xlsx");
+  var saveOptions = aspose.cells.PdfSaveOptions();
+  saveOptions.setOnePagePerSheet(true);
+  // convert Excel to PDF
+  workbook.save("Excel to Mini_Statement.pdf", saveOptions);
 
   res.status(200).json({
     status: "success",
