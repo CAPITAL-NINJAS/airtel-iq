@@ -74,10 +74,10 @@ transactionSchema.pre('save', function (next) {
 transactionSchema.pre(/^find/, function (next) {
   this.populate({
     path: 'from_account_no',
-    select: 'account_no balance',
+    select: 'account_no balance account_type -customer_id -_id',
   }).populate({
     path: 'to_account_no',
-    select: 'account_no balance',
+    select: 'account_no balance account_type -customer_id -_id',
   });
 
   next();
