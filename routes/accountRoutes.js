@@ -5,6 +5,8 @@ const router = express.Router();
 
 router.get('/:mob_no', accountController.getBalance);
 
+router.get('/getmini/:mob_no',accountController.getministatement);
+
 router
   .route('/')
   .get(accountController.getAllAccounts)

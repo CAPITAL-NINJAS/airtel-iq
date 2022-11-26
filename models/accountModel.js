@@ -1,11 +1,11 @@
-const mongoose = require('mongoose');
-var randomstring = require('randomstring');
+const mongoose = require("mongoose");
+var randomstring = require("randomstring");
 
 const accountSchema = new mongoose.Schema(
   {
     customer_id: {
       type: mongoose.Schema.ObjectId,
-      ref: 'Customer',
+      ref: "Customer",
     },
     custId: {
       type: String,
@@ -24,14 +24,14 @@ const accountSchema = new mongoose.Schema(
       type: String,
       enum: {
         values: [
-          'Savings',
-          'Current',
-          'Salary',
-          'Fixed Deposit',
-          'Recurring Deposit',
-          'NRI',
+          "Savings",
+          "Current",
+          "Salary",
+          "Fixed Deposit",
+          "Recurring Deposit",
+          "NRI",
         ],
-        message: 'Please enter a valid account type',
+        message: "Please enter a valid account type",
       },
     },
     created_at: {
@@ -47,27 +47,27 @@ const accountSchema = new mongoose.Schema(
 
 accountSchema.pre(/^find/, function (next) {
   this.populate({
-    path: 'customer_id',
-    select: 'first_name last_name email mobile_no',
+    path: "customer_id",
+    select: "first_name last_name email mobile_no",
   });
 
   next();
 });
 
-accountSchema.pre('save', function (next) {
+accountSchema.pre("save", function (next) {
   this.custId = randomstring.generate({
     length: 8,
-    charset: 'numeric',
+    charset: "numeric",
   });
 
   this.account_no = randomstring.generate({
     length: 16,
-    charset: 'numeric',
+    charset: "numeric",
   });
 
   next();
 });
 
-const Account = mongoose.model('Account', accountSchema);
+const Account = mongoose.model("Account", accountSchema);
 
 module.exports = Account;

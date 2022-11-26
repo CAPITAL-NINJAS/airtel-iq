@@ -1,27 +1,55 @@
-const Account = require('../models/accountModel');
-const Customer = require('../models/customerModel');
+const Account = require("../models/accountModel");
+const Customer = require("../models/customerModel");
+const Transaction = require("../models/transactionModel");
+const AppError = require("../utils/appError");
+const catchAsync = require("../utils/catchAsync");
+const factory = require("./handlerFactory");
 
-const AppError = require('../utils/appError');
-const catchAsync = require('../utils/catchAsync');
-const factory = require('./handlerFactory');
+exports.getministatement = catchAsync(async (req, res, next) => {
+  const mobile = req.params.mob_no;
+
+  const user = await Customer.findOne({ mobile_no: mobile });
+  if (!user) {
+    return next(new AppError("User is not present", 404));
+  }
+
+  const account = await Account.findOne({ customer_id: user._id });
+  if (!user) {
+    return next(new AppError("Account not found", 404));
+  }
+
+  const transaction = await Transaction.find({ from_account_no: account._id })
+    .limit(5)
+    .select("transaction_type transaction_medium transaction_status");
+  if (!user) {
+    return next(new AppError("Transaction not found,404"));
+  }
+
+  res.status(200).json({
+    status: "success",
+    data: {
+      transaction,
+    },
+  });
+});
 
 exports.getBalance = catchAsync(async (req, res, next) => {
   const mobile = req.params.mob_no;
 
   const user = await Customer.findOne({ mobile_no: mobile });
   if (!user) {
-    return next(new AppError('User not found', 404));
+    return next(new AppError("User not found", 404));
   }
 
   const account = await Account.findOne({ customer_id: user._id });
   if (!account) {
-    return next(new AppError('Account not found', 404));
+    return next(new AppError("Account not found", 404));
   }
 
   const balance = account.balance;
 
   res.status(200).json({
-    status: 'success',
+    status: "success",
     data: {
       balance,
     },
