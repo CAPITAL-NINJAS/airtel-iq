@@ -33,7 +33,7 @@ exports.getData = async (data) => {
             method: 'post',
             url: 'https://capital-ninjas.onrender.com/api/v1/auth/createOtp',
             data: {
-              mob_no: fromMob,
+              mob_no: fromMob.slice(2) * 1,
             },
           })
             .then((res) => {
@@ -73,7 +73,7 @@ exports.getData = async (data) => {
         method: 'post',
         url: 'https://capital-ninjas.onrender.com/api/v1/auth/verifyOtp',
         data: {
-          mob_no: fromMob,
+          mob_no: fromMob.slice(2) * 1,
           otp,
         },
       })
@@ -81,7 +81,9 @@ exports.getData = async (data) => {
           if (res.status == 'success') {
             axios({
               method: 'post',
-              url: `https://capital-ninjas.onrender.com/api/v1/accounts/${fromMob}`,
+              url: `https://capital-ninjas.onrender.com/api/v1/accounts/${fromMob.slice(
+                2
+              )}`,
             })
               .then((res) => {
                 if (res.data.status == 'success') {
