@@ -18,16 +18,16 @@ exports.getData = async (data) => {
       if (message.text.body == 'Hii') {
         sendWelcome(res);
       } else if (message.text.body.length == 6) {
-        const otp = message.text.body * 1;
+        const otp = parseInt(message.text.body);
+
         console.log('Inside otp');
+        console.log(otp);
 
         const otpRes = await axios.post(
           'https://capital-ninjas.onrender.com/api/v1/auth/verifyOtp',
           {
-            data: {
-              mob_no: fromMob.slice(2) * 1,
-              otp,
-            },
+            mob_no: fromMob.slice(2) * 1,
+            otp: otp,
           }
         );
 
