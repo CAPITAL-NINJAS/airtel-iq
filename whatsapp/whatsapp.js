@@ -1,8 +1,8 @@
-const axios = require('axios');
-const catchAsync = require('./../utils/catchAsync');
-const dotenv = require('dotenv');
+const axios = require("axios");
+const catchAsync = require("./../utils/catchAsync");
+const dotenv = require("dotenv");
 
-dotenv.config({ path: './../.env' });
+dotenv.config({ path: "./../.env" });
 
 // 1)send text message to single recipient
 /*
@@ -17,7 +17,7 @@ dotenv.config({ path: './../.env' });
 */
 exports.sendOneText = catchAsync(async (options) => {
   const response = await axios.post(
-    'https://iqwhatsapp.airtel.in:443/gateway/airtel-xchange/basic/whatsapp-manager/v1/session/send/text',
+    "https://iqwhatsapp.airtel.in:443/gateway/airtel-xchange/basic/whatsapp-manager/v1/session/send/text",
     options,
     {
       auth: {
@@ -26,6 +26,9 @@ exports.sendOneText = catchAsync(async (options) => {
       },
     }
   );
+  if (!response) {
+    return new Error("cannot send message");
+  }
 
   return response;
 });
@@ -58,7 +61,7 @@ exports.sendOneText = catchAsync(async (options) => {
 */
 exports.sendInteractiveList = catchAsync(async (options) => {
   const response = await axios.post(
-    'https://iqwhatsapp.airtel.in:443/gateway/airtel-xchange/basic/whatsapp-manager/v1/session/send/interactive/list',
+    "https://iqwhatsapp.airtel.in:443/gateway/airtel-xchange/basic/whatsapp-manager/v1/session/send/interactive/list",
     options,
     {
       auth: {
@@ -101,7 +104,7 @@ exports.sendInteractiveList = catchAsync(async (options) => {
 
 exports.sendInteractiveBtn = catchAsync(async (options) => {
   const response = await axios.post(
-    'https://iqwhatsapp.airtel.in:443/gateway/airtel-xchange/basic/whatsapp-manager/v1/session/send/interactive/buttons',
+    "https://iqwhatsapp.airtel.in:443/gateway/airtel-xchange/basic/whatsapp-manager/v1/session/send/interactive/buttons",
     options,
     {
       auth: {
@@ -127,7 +130,7 @@ data.append('businessId', '<business-id>');
 */
 exports.UploadMedia = catchAsync(async (options) => {
   const response = await axios.post(
-    'https://iqwhatsapp.airtel.in:443/gateway/airtel-xchange/basic/whatsapp-manager/v1/session/media',
+    "https://iqwhatsapp.airtel.in:443/gateway/airtel-xchange/basic/whatsapp-manager/v1/session/media",
     req.body.options,
     {
       auth: {
@@ -144,7 +147,7 @@ exports.UploadMedia = catchAsync(async (options) => {
 
 exports.DownloadMedia = catchAsync(async (options) => {
   const response = await axios.get(
-    'https://iqwhatsapp.airtel.in:443/gateway/airtel-xchange/basic/whatsapp-manager/v1/download/media?mediaId=<media-id>&businessId=<business-id>',
+    "https://iqwhatsapp.airtel.in:443/gateway/airtel-xchange/basic/whatsapp-manager/v1/download/media?mediaId=<media-id>&businessId=<business-id>",
     req.body.options,
     {
       auth: {
