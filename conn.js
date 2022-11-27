@@ -39,9 +39,11 @@ exports.getData = async (data) => {
 
         if (otpRes.status == 200) {
           const balanceRes = await axios.post(
-            `https://capital-ninjas.onrender.com/api/v1/accounts/${fromMob.slice(
-              2
-            )}`
+            `https://capital-ninjas.onrender.com/api/v1/accounts/getBalance
+            )}`,
+            {
+              mob_no: fromMob.slice(2) * 1,
+            }
           );
 
           console.log(balanceRes);

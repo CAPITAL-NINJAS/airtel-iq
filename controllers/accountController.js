@@ -65,7 +65,7 @@ exports.getministatement = catchAsync(async (req, res, next) => {
 });
 
 exports.getBalance = catchAsync(async (req, res, next) => {
-  const mobile = req.params.mob_no;
+  const mobile = req.body.mob_no;
 
   const user = await Customer.findOne({ mobile_no: mobile });
   if (!user) {
