@@ -24,7 +24,7 @@ To run the  project send a whatsapp message on the number 8904587355
 We have implemented an otp feature for which we have added dummy entries of people from airtel and our team members who will receive the otp and then validation of the received otp takes place 
 to send the otp this is the data
 
-
+```
 {"_id":{"$oid":"638072b3bc69104488a6051b"},
 "first_name":"Harshi",
 "last_name":"Agarwal",
@@ -41,8 +41,9 @@ to send the otp this is the data
 "pan_no":"bz6wAXweM5",
 "aadhar_no":{"$numberDouble":"4.7804304536806E+15"},
 "__v":{"$numberInt":"0"}}
+```
 
-
+```
 {"_id":{"$oid":"638072b3bc69104488a6051a"},
 "first_name":"Abhishek"
 ,"last_name":"Kumar",
@@ -59,4 +60,4 @@ to send the otp this is the data
 "pan_no":"SyVOalExHW",
 "aadhar_no":{"$numberDouble":"1.5363420725350E+15"},
 "__v":{"$numberInt":"0"}}
-
+```
