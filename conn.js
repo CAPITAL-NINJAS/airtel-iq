@@ -15,7 +15,7 @@ exports.getData = async (data) => {
 };
 const sendWelcome = (options) => {
   const message = {
-    text: "Hi,Glad to see you here \n Hope you are doing well 😃.\n Welcome to the Capital Ninjas😃 \n How may I help you?",
+    text: "Hi,Glad to see you here Hope you are doing well 😃.Welcome to the Capital Ninjas😃.How may I help you?",
   };
   options.message = message;
   whatsapp.sendOneText(options);
