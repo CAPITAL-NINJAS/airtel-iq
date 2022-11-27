@@ -84,8 +84,7 @@ exports.getData = async (data) => {
             }
           );
 
-          console.log(balanceRes.data);
-          console.log(balanceRes.data.balance);
+          console.log(JSON.parse(balanceRes.data));
 
           if (!balanceRes) {
             sendErrorReply(res);

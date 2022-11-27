@@ -11,8 +11,8 @@ exports.sendBankingServices = (options) => {
     options: [
       {
         tag: 'B-01',
-        title: 'Check bank balance',
-        description: 'Know your bank balance instantly',
+        title: 'Check Account Balance',
+        description: 'Know your account balance instantly',
       },
       {
         tag: 'B-02',
@@ -36,7 +36,7 @@ exports.sendBankingServices = (options) => {
 // Request otp from customer
 exports.requestOtp = (options) => {
   const message = {
-    text: 'To get your Bank Balance.\nPlease enter the otp sent to your mobile number',
+    text: 'To get your Account Balance.\nPlease enter the otp sent to your mobile number',
   };
 
   options.message = message;
@@ -46,7 +46,7 @@ exports.requestOtp = (options) => {
 // Send balance to Customer
 exports.showBalance = (balance, options) => {
   const message = {
-    text: `Your Balance is : ${balance}`,
+    text: `Your Account Balance is : ${balance}`,
   };
 
   options.message = message;
