@@ -18,7 +18,7 @@ dotenv.config({ path: "./../.env" });
 exports.sendOneText = catchAsync(async (options) => {
   const response = await axios.post(
     "https://iqwhatsapp.airtel.in:443/gateway/airtel-xchange/basic/whatsapp-manager/v1/session/send/text",
-    options,
+    JSON.stringify(options),
     {
       auth: {
         username: process.env.KONG_USER,
