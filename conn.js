@@ -16,9 +16,28 @@ exports.getData = async (data) => {
 
 const sendWelcome = (options) => {
   const message = {
-    text: 'Hi,Glad to see you here Hope you are doing well 😃.Welcome to the Capital Ninjas😃.How may I help you?',
+    text: `Hi, Welcome to the Capital 🏯 of  Capital Ninjas😃. \n\nPlease select your language.`,
   };
 
+  const mediaAttachment = {
+    type: 'IMAGE',
+    id: 672147101199754,
+  };
+
+  const buttons = [
+    {
+      tag: 1,
+      title: 'English',
+    },
+    {
+      tag: 2,
+      title: 'Hindi',
+    },
+  ];
+
   options.message = message;
-  whatsapp.sendOneText(options);
+  options.mediaAttachment = mediaAttachment;
+  options.buttons = buttons;
+
+  whatsapp.sendInteractiveBtn(options);
 };
