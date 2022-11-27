@@ -6,9 +6,9 @@ exports.getData = async (data) => {
   const toMob = data.to;
   const message = data.message;
   const businessId = data.businessId;
-  if (sessionId && fromMob && toMob && message && businessId) {
+  if (sessionId && fromMob && toMob && message) {
     if (message.text.body == "Hii") {
-      const res = { sessionId, fromMob, toMob, message, businessId };
+      const res = { sessionId, fromMob, toMob, message };
       sendWelcome(res);
     }
   }
