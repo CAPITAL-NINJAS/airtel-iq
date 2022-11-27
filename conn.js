@@ -84,14 +84,15 @@ exports.getData = async (data) => {
             }
           );
 
-          console.log(balanceRes);
+          console.log(balanceRes.data);
+          console.log(balanceRes.data.balance);
 
           if (!balanceRes) {
             sendErrorReply(res);
             sendWelcome(res);
           }
 
-          banking.showBalance(balanceRes.balance, res);
+          banking.showBalance(balanceRes.data.balance, res);
         }
       }
     } else if (message.interactive) {
