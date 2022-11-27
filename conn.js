@@ -66,7 +66,7 @@ exports.getData = async (data) => {
         //   sendForexMessage(res);
         // }
       }
-    } else if (message.text.body == /^[0-9]{6}$/) {
+    } else if (message.text.body == /\d{6}/) {
       const otp = message.text.body * 1;
 
       axios({
