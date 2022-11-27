@@ -66,6 +66,9 @@ exports.getData = async (data) => {
           {
             mob_no: fromMob.slice(2) * 1,
             otp: otp,
+          },
+          {
+            headers: { 'Content-Type': 'application/json' },
           }
         );
 
@@ -81,10 +84,13 @@ exports.getData = async (data) => {
             'https://capital-ninjas.onrender.com/api/v1/accounts/getBalance',
             {
               mob_no: fromMob.slice(2) * 1,
+            },
+            {
+              headers: { 'Content-Type': 'application/json' },
             }
           );
 
-          console.log(JSON.parse(balanceRes.data));
+          console.log(balanceRes.data);
 
           if (!balanceRes) {
             sendErrorReply(res);
