@@ -35,22 +35,22 @@ exports.getData = async (data) => {
           return new Error('Otp not matched');
         }
 
-        console.log(otpRes.data.status);
+        console.log(otpRes.status);
 
-        if (otpRes.data.status == 'success') {
+        if (otpRes.status == 'success') {
           const balanceRes = await axios.post(
             `https://capital-ninjas.onrender.com/api/v1/accounts/${fromMob.slice(
               2
             )}`
           );
 
-          console.log(balanceRes.data.balance);
+          console.log(balanceRes.balance);
 
           if (!balanceRes) {
             return new Error('Please try again');
           }
 
-          banking.showBalance(balanceRes.data.balance, res);
+          banking.showBalance(balanceRes.balance, res);
         }
       }
     } else if (message.interactive) {
