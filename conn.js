@@ -117,13 +117,15 @@ exports.getData = async (data) => {
               mob_no: fromMob.slice(2) * 1,
             },
           })
-            .then((res) => {
-              banking.requestOtp(res);
+            .then((response) => {
+              console.log(response);
             })
             .catch((err) => {
               sendErrorReply(res);
               sendWelcome(res);
             });
+
+          banking.requestOtp(res);
         } else if (
           message.interactive.list_reply.title == 'Financial Services'
         ) {
