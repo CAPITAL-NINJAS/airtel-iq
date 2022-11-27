@@ -1,5 +1,5 @@
-const catchAsync = require('../utils/catchAsync');
-const { getData } = require('./../connection');
+const catchAsync = require("../utils/catchAsync");
+const { getData } = require("./../conn");
 
 exports.postCallback = catchAsync(async (req, res, next) => {
   const data = req.body;
@@ -11,7 +11,7 @@ exports.postCallback = catchAsync(async (req, res, next) => {
   }
 
   res.status(200).json({
-    status: 'success',
+    status: "success",
     data,
   });
 });
