@@ -1,26 +1,26 @@
 // Send Banking Services options to customer
 exports.sendBankingServices = (options) => {
   const message = {
-    text: "Banking Services available for you on Whatsapp!",
+    text: 'Banking Services available for you on Whatsapp!',
   };
 
   const list = {
-    heading: "Banking Services",
+    heading: 'Banking Services',
     options: [
       {
-        tag: "B-01",
-        title: "Check bank balance",
-        description: "Know your bank balance instantly",
+        tag: 'B-01',
+        title: 'Check bank balance',
+        description: 'Know your bank balance instantly',
       },
       {
-        tag: "B-02",
-        title: "Request Mini Statement",
-        description: "Raise instant request for Account Statement",
+        tag: 'B-02',
+        title: 'Request Mini Statement',
+        description: 'Raise instant request for Account Statement',
       },
       {
-        tag: "B-03",
-        title: "Find Cheque Status",
-        description: "Know your Issued Cheque Status",
+        tag: 'B-03',
+        title: 'Find Cheque Status',
+        description: 'Know your Issued Cheque Status',
       },
     ],
   };
@@ -32,9 +32,9 @@ exports.sendBankingServices = (options) => {
 };
 
 // Request otp from customer
-const requestOtp = (options) => {
+exports.requestOtp = (options) => {
   const message = {
-    text: "To get your Bank Balance.\nPlease enter the otp sent to your mobile number",
+    text: 'To get your Bank Balance.\nPlease enter the otp sent to your mobile number',
   };
 
   options.message = message;
@@ -42,7 +42,7 @@ const requestOtp = (options) => {
 };
 
 // Send balance to Customer
-const showBalance = (balance, options) => {
+exports.showBalance = (balance, options) => {
   const message = {
     text: `Your Balance is : ${balance}`,
   };

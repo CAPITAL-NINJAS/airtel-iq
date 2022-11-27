@@ -1,8 +1,10 @@
-const axios = require("axios");
-const whatsapp = require("./whatsapp/whatsapp");
-const banking = require("./flow/banking");
-const finance = require("./flow/finance");
-const insurance = require("./flow/insurance");
+const axios = require('axios');
+const whatsapp = require('./whatsapp/whatsapp');
+const banking = require('./flow/banking');
+const finance = require('./flow/finance');
+const insurance = require('./flow/insurance');
+
+// Get message from user
 exports.getData = async (data) => {
   const sessionId = data.sessionId;
   const fromMob = data.from;
@@ -13,27 +15,27 @@ exports.getData = async (data) => {
     const res = { sessionId, from: toMob, to: fromMob, message };
 
     if (message.text) {
-      if (message.text.body == "Hii") {
+      if (message.text.body == 'Hii') {
         sendWelcome(res);
       }
     } else if (message.interactive) {
       if (message.interactive.button_reply) {
-        if (message.interactive.button_reply.title == "English") {
+        if (message.interactive.button_reply.title == 'English') {
           sendEnglishReply(res);
           sendServices(res);
-        } else if (message.interactive.button_reply.title == "Hindi") {
+        } else if (message.interactive.button_reply.title == 'Hindi') {
           sendHindiReply(res);
           sendServices(res);
         }
       } else if (message.interactive.list_reply) {
-        if (message.interactive.list_reply.title == "Banking Services") {
+        if (message.interactive.list_reply.title == 'Banking Services') {
           banking.sendBankingServices(res);
         } else if (
-          message.interactive.list_reply.title == "Check bank balance"
+          message.interactive.list_reply.title == 'Check bank balance'
         ) {
           axios({
-            method: "post",
-            url: "https://capital-ninjas.onrender.com/api/v1/auth/createOtp",
+            method: 'post',
+            url: 'https://capital-ninjas.onrender.com/api/v1/auth/createOtp',
             data: {
               mob_no: fromMob.slice(2) * 1,
             },
@@ -47,55 +49,53 @@ exports.getData = async (data) => {
 
           banking.requestOtp(res);
         } else if (
-          message.interactive.list_reply.title == "Financial Services"
+          message.interactive.list_reply.title == 'Financial Services'
         ) {
           finance.sendFinanceServices(res);
         } else if (
-          message.interactive.list_reply.title == "Insurance Services"
+          message.interactive.list_reply.title == 'Insurance Services'
         ) {
           insurance.sendInsuranceServices(res);
         } else if (
-          message.interactive.list_reply.title == "Wealth Management"
+          message.interactive.list_reply.title == 'Wealth Management'
         ) {
           finance.sendWealthManagement(res);
-        } else if (message.interactive.list_reply.title == "Stocks") {
+        } else if (message.interactive.list_reply.title == 'Stocks') {
           finance.sendStocksMessage(res);
-        } else if (message.interactive.list_reply.title == "Forex") {
+        } else if (message.interactive.list_reply.title == 'Forex') {
           finance.sendForexMessage(res);
         }
       }
     } else if (message.text.body == /\d{6}/) {
       const otp = message.text.body * 1;
 
-      axios({
-        method: "post",
-        url: "https://capital-ninjas.onrender.com/api/v1/auth/verifyOtp",
-        data: {
-          mob_no: fromMob.slice(2) * 1,
-          otp,
-        },
-      })
-        .then((res) => {
-          if (res.data.status == "success") {
-            axios({
-              method: "post",
-              url: `https://capital-ninjas.onrender.com/api/v1/accounts/${fromMob.slice(
-                2
-              )}`,
-            })
-              .then((res) => {
-                if (res.data.status == "success") {
-                  showBalance(data.data.balance, res);
-                }
-              })
-              .catch((err) => {
-                console.log(err);
-              });
-          }
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+      const otpRes = await axios.post(
+        'https://capital-ninjas.onrender.com/api/v1/auth/verifyOtp',
+        {
+          data: {
+            mob_no: fromMob.slice(2) * 1,
+            otp,
+          },
+        }
+      );
+
+      if (!otpRes) {
+        return new Error('Otp not matched');
+      }
+
+      if (otpRes.data.status == 'success') {
+        const balanceRes = await axios.post(
+          `https://capital-ninjas.onrender.com/api/v1/accounts/${fromMob.slice(
+            2
+          )}`
+        );
+
+        if (!balanceRes) {
+          return new Error('Please try again');
+        }
+
+        banking.showBalance(balanceRes.data.balance, res);
+      }
     }
   }
 };
@@ -107,18 +107,18 @@ const sendWelcome = (options) => {
   };
 
   const mediaAttachment = {
-    type: "IMAGE",
+    type: 'IMAGE',
     id: 672147101199754,
   };
 
   const buttons = [
     {
-      tag: "L-01",
-      title: "English",
+      tag: 'L-01',
+      title: 'English',
     },
     {
-      tag: "L-02",
-      title: "Hindi",
+      tag: 'L-02',
+      title: 'Hindi',
     },
   ];
 
@@ -152,27 +152,27 @@ const sendHindiReply = (options) => {
 // Send Overall Services to Customer
 const sendServices = (options) => {
   const message = {
-    text: "Here are the services provided by me",
+    text: 'Here are the services provided by me',
   };
 
   const list = {
-    heading: "Services",
+    heading: 'Services',
     options: [
       {
-        tag: "S-01",
-        title: "Banking Services",
-        description: "Check account balance | Get mini statement & more",
+        tag: 'S-01',
+        title: 'Banking Services',
+        description: 'Check account balance | Get mini statement & more',
       },
       {
-        tag: "S-02",
-        title: "Financial Services",
-        description: "Wealth management | Financial advisory & more",
+        tag: 'S-02',
+        title: 'Financial Services',
+        description: 'Wealth management | Financial advisory & more',
       },
       {
-        tag: "S-03",
-        title: "Insurance Services",
+        tag: 'S-03',
+        title: 'Insurance Services',
         description:
-          "Buy | Renew | Get details | Terminate | Installment & more",
+          'Buy | Renew | Get details | Terminate | Installment & more',
       },
     ],
   };
@@ -182,5 +182,3 @@ const sendServices = (options) => {
 
   whatsapp.sendInteractiveList(options);
 };
-
-// Send Financial Services options to customer
