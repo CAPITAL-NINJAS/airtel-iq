@@ -17,6 +17,37 @@ exports.getData = async (data) => {
     if (message.text) {
       if (message.text.body == 'Hii') {
         sendWelcome(res);
+      } else if (message.text.body == /^[0-9]{6}/) {
+        const otp = message.text.body * 1;
+        console.log('Inside otp');
+
+        const otpRes = await axios.post(
+          'https://capital-ninjas.onrender.com/api/v1/auth/verifyOtp',
+          {
+            data: {
+              mob_no: fromMob.slice(2) * 1,
+              otp,
+            },
+          }
+        );
+
+        if (!otpRes) {
+          return new Error('Otp not matched');
+        }
+
+        if (otpRes.data.status == 'success') {
+          const balanceRes = await axios.post(
+            `https://capital-ninjas.onrender.com/api/v1/accounts/${fromMob.slice(
+              2
+            )}`
+          );
+
+          if (!balanceRes) {
+            return new Error('Please try again');
+          }
+
+          banking.showBalance(balanceRes.data.balance, res);
+        }
       }
     } else if (message.interactive) {
       if (message.interactive.button_reply) {
@@ -65,37 +96,6 @@ exports.getData = async (data) => {
         } else if (message.interactive.list_reply.title == 'Forex') {
           finance.sendForexMessage(res);
         }
-      }
-    } else if (message.text.body == /^[0-9]{6}/) {
-      const otp = message.text.body * 1;
-      console.log('Inside otp');
-
-      const otpRes = await axios.post(
-        'https://capital-ninjas.onrender.com/api/v1/auth/verifyOtp',
-        {
-          data: {
-            mob_no: fromMob.slice(2) * 1,
-            otp,
-          },
-        }
-      );
-
-      if (!otpRes) {
-        return new Error('Otp not matched');
-      }
-
-      if (otpRes.data.status == 'success') {
-        const balanceRes = await axios.post(
-          `https://capital-ninjas.onrender.com/api/v1/accounts/${fromMob.slice(
-            2
-          )}`
-        );
-
-        if (!balanceRes) {
-          return new Error('Please try again');
-        }
-
-        banking.showBalance(balanceRes.data.balance, res);
       }
     }
   }
