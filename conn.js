@@ -9,20 +9,24 @@ exports.getData = async (data) => {
   if (sessionId && fromMob && toMob && message) {
     const res = { sessionId, from: toMob, to: fromMob, message };
 
-    if (message.text.body == 'Hii') {
-      sendWelcome(res);
-    } else if (
-      message.interactive.button_reply &&
-      message.interactive.button_reply.title == 'English'
-    ) {
-      sendEnglishReply(res);
-      sendServices(res);
-    } else if (
-      message.interactive.button_reply &&
-      message.interactive.button_reply.title == 'Hindi'
-    ) {
-      sendHindiReply(res);
-      sendServices(res);
+    if (message.text) {
+      if (message.text.body == 'Hii') {
+        sendWelcome(res);
+      }
+    } else if (message.interactive) {
+      if (
+        message.interactive.button_reply &&
+        message.interactive.button_reply.title == 'English'
+      ) {
+        sendEnglishReply(res);
+        sendServices(res);
+      } else if (
+        message.interactive.button_reply &&
+        message.interactive.button_reply.title == 'Hindi'
+      ) {
+        sendHindiReply(res);
+        sendServices(res);
+      }
     }
   }
 };
@@ -39,11 +43,11 @@ const sendWelcome = (options) => {
 
   const buttons = [
     {
-      tag: 1,
+      tag: 'L-01',
       title: 'English',
     },
     {
-      tag: 2,
+      tag: 'L-02',
       title: 'Hindi',
     },
   ];
@@ -83,17 +87,17 @@ const sendServices = (options) => {
     heading: 'Services',
     options: [
       {
-        tag: 'Banking ',
+        tag: 'S-01',
         title: 'Banking Services',
         description: 'Check account balance | Get mini statement & more',
       },
       {
-        tag: 'Finance',
+        tag: 'S-02',
         title: 'Financial Services',
         description: 'Wealth management | Financial advisory & more',
       },
       {
-        tag: 'Insurance',
+        tag: 'S-03',
         title: 'Insurance Services',
         description:
           'Buy | Renew | Get details | Terminate | Installment & more',
