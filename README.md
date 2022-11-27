@@ -1,20 +1,26 @@
 # airtel-iq
+
 #This project was build by our team Capital Ninjas
+
 ###Team Members
+
 1)Atharva Nimbalkar
 2)Varun Bagul
 3)Om Chimanpure
 4)Prathamesh Kagane
 
 ##Description:
+
 1)Our whatsapp bot tries provides all the three services at a time i.e Banking,Finance,Insurance.
 2)Our bot provides the best state of the art facility for validation and authentication, which is provided by very limited banks.
 3)Our bot can be integrated with any of the given databases provided by the banks.
 
 ##Running the project
+
 To run the  project send a whatsapp message on the number 8904587355 
 
 ##Test data
+
 We have implemented an otp feature for which we have added dummy entries of people from airtel and our team members who will receive the otp and then validation of the received otp takes place 
 to send the otp this is the data
 
