@@ -68,7 +68,10 @@ exports.getData = async (data) => {
             otp: otp,
           },
           {
-            headers: { 'Content-Type': 'application/json' },
+            headers: {
+              'Content-Type': 'application/json',
+              'Accept-Encoding': 'null',
+            },
           }
         );
 
@@ -86,7 +89,10 @@ exports.getData = async (data) => {
               mob_no: fromMob.slice(2) * 1,
             },
             {
-              headers: { 'Content-Type': 'application/json' },
+              headers: {
+                'Content-Type': 'application/json',
+                'Accept-Encoding': 'null',
+              },
             }
           );
 
