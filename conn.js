@@ -17,7 +17,7 @@ exports.getData = async (data) => {
     if (message.text) {
       if (message.text.body == 'Hii') {
         sendWelcome(res);
-      } else if (message.text.body == /^[0-9]{6}/) {
+      } else if (message.text.body.length == 6) {
         const otp = message.text.body * 1;
         console.log('Inside otp');
 
