@@ -53,7 +53,7 @@ exports.getData = async (data) => {
     const res = { sessionId, from: toMob, to: fromMob, message };
 
     if (message.text) {
-      if (welcome_intent.contains(message.text.body)) {
+      if (welcome_intent.includes(message.text.body)) {
         sendWelcome(res);
       } else if (message.text.body.length == 6) {
         const otp = parseInt(message.text.body);
