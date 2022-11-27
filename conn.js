@@ -58,9 +58,6 @@ exports.getData = async (data) => {
       } else if (message.text.body.length == 6) {
         const otp = parseInt(message.text.body);
 
-        console.log('Inside otp');
-        console.log(otp);
-
         const otpRes = await axios.post(
           'https://capital-ninjas.onrender.com/api/v1/auth/verifyOtp',
           {
@@ -80,9 +77,7 @@ exports.getData = async (data) => {
           sendWelcome(res);
         }
 
-        console.log(otpRes);
-
-        if (otpRes.status == 200) {
+        if (otpRes.data.status == 'success') {
           const balanceRes = await axios.post(
             'https://capital-ninjas.onrender.com/api/v1/accounts/getBalance',
             {
@@ -96,14 +91,12 @@ exports.getData = async (data) => {
             }
           );
 
-          console.log(balanceRes.data);
-
           if (!balanceRes) {
             sendErrorReply(res);
             sendWelcome(res);
           }
 
-          banking.showBalance(balanceRes.data.balance, res);
+          banking.showBalance(balanceRes.data.data.balance, res);
         }
       }
     } else if (message.interactive) {
