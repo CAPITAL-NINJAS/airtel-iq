@@ -107,7 +107,7 @@ exports.getData = async (data) => {
         if (message.interactive.list_reply.title == 'Banking Services') {
           banking.sendBankingServices(res);
         } else if (
-          message.interactive.list_reply.title == 'Check bank balance'
+          message.interactive.list_reply.title == 'Check Account Balance'
         ) {
           axios({
             method: 'post',
