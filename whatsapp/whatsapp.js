@@ -69,6 +69,7 @@ exports.sendInteractiveList = catchAsync(async (options) => {
         username: process.env.KONG_USER,
         password: process.env.KONG_PASS,
       },
+      headers: { 'Content-Type': 'application/json' },
     }
   );
 
@@ -112,6 +113,7 @@ exports.sendInteractiveBtn = catchAsync(async (options) => {
         username: process.env.KONG_USER,
         password: process.env.KONG_PASS,
       },
+      headers: { 'Content-Type': 'application/json' },
     }
   );
 
@@ -132,12 +134,13 @@ data.append('businessId', '<business-id>');
 exports.UploadMedia = catchAsync(async (options) => {
   const response = await axios.post(
     'https://iqwhatsapp.airtel.in:443/gateway/airtel-xchange/basic/whatsapp-manager/v1/session/media',
-    req.body.options,
+    options,
     {
       auth: {
         username: process.env.KONG_USER,
         password: process.env.KONG_PASS,
       },
+      headers: { 'Content-Type': 'application/json' },
     }
   );
 
@@ -149,12 +152,13 @@ exports.UploadMedia = catchAsync(async (options) => {
 exports.DownloadMedia = catchAsync(async (options) => {
   const response = await axios.get(
     'https://iqwhatsapp.airtel.in:443/gateway/airtel-xchange/basic/whatsapp-manager/v1/download/media?mediaId=<media-id>&businessId=<business-id>',
-    req.body.options,
+    options,
     {
       auth: {
         username: process.env.KONG_USER,
         password: process.env.KONG_PASS,
       },
+      headers: { 'Content-Type': 'application/json' },
     }
   );
 
