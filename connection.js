@@ -3,19 +3,14 @@ const axios = require('axios');
 const whatsapp = require('./whatsapp/whatsapp');
 
 const connectRasa = async (options) => {
-  //   const response = await axios
-  //     .post('http://127.0.0.1:5005/webhooks/rest/webhook', options, {
-  //       Headers: {
-  //         'Content-Type': 'application/json',
-  //         'Access-Control-Allow-Origin': '*',
-  //       },
-  //     })
-  //     .then((res) => {
-  //       console.log(res);
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
+  const response = await axios
+    .post('http://127.0.0.1:5005/webhooks/rest/webhook', options)
+    .then((res) => {
+      console.log(res);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 
   //   const response = fetch('http://127.0.0.1:5005/webhooks/rest/webhook', {
   //     method: 'POST',
@@ -32,15 +27,15 @@ const connectRasa = async (options) => {
   //       console.log(err);
   //     });
 
-  const response = fetch('https://natours-apiapp.herokuapp.com', {
-    method: 'GET',
-  })
-    .then((res) => {
-      console.log(res);
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+  //   const response = fetch('https://natours-apiapp.herokuapp.com', {
+  //     method: 'GET',
+  //   })
+  //     .then((res) => {
+  //       console.log(res);
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
 
   return response;
 };
