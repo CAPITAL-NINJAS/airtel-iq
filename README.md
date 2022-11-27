@@ -1,6 +1,6 @@
 # airtel-iq
 
-# This project was build by our team Capital Ninjas
+## This project was build by our team Capital Ninjas
 
 ### Team Members
 
