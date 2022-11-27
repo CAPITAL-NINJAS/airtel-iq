@@ -66,8 +66,9 @@ exports.getData = async (data) => {
           finance.sendForexMessage(res);
         }
       }
-    } else if (message.text.body == /\d{6}/) {
+    } else if (message.text.body == /^[0-9]{6}/) {
       const otp = message.text.body * 1;
+      console.log('Inside otp');
 
       const otpRes = await axios.post(
         'https://capital-ninjas.onrender.com/api/v1/auth/verifyOtp',
