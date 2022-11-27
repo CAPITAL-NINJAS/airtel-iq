@@ -32,7 +32,7 @@ const connectRasa = async (options) => {
   //       console.log(err);
   //     });
 
-  const response = fetch('http://localhost:8000', {
+  const response = fetch('https://natours-apiapp.herokuapp.com', {
     method: 'GET',
   })
     .then((res) => {
