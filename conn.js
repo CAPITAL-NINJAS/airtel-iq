@@ -25,21 +25,25 @@ exports.getData = async (data) => {
       } else if (message.interactive.list_reply) {
         if (message.interactive.list_reply.title == 'Banking Services') {
           sendBankingServices(res);
-        } else if (
-          message.interactive.list_reply.title == 'Financial Services'
-        ) {
+        }
+
+        if (message.interactive.list_reply.title == 'Financial Services') {
           sendFinanceServices(res);
-        } else if (
-          message.interactive.list_reply.title == 'Insurance Services'
-        ) {
+        }
+
+        if (message.interactive.list_reply.title == 'Insurance Services') {
           sendInsuranceServices(res);
-        } else if (
-          message.interactive.list_reply.title == 'Wealth Management'
-        ) {
+        }
+
+        if (message.interactive.list_reply.title == 'Wealth Management') {
           sendWealthManagement(res);
-        } else if (message.interactive.list_reply.title == 'Stocks') {
+        }
+
+        if (message.interactive.list_reply.title == 'Stocks') {
           sendStocksMessage(res);
-        } else if (message.interactive.list_reply.title == 'Forex') {
+        }
+
+        if (message.interactive.list_reply.title == 'Forex') {
           sendForexMessage(res);
         }
       }
@@ -315,24 +319,24 @@ const sendStocksMessage = (options) => {
     heading: 'Stocks',
     options: [
       {
-        tag: 'S-01',
+        tag: 'ST-01',
         title: 'Equity',
         description:
           'Measures of a company totals assets minus total liabilities.',
       },
       {
-        tag: 'S-02',
+        tag: 'ST-02',
         title: 'Debts',
         description: 'Amount owned by the borrower to the lender.',
       },
       {
-        tag: 'S-03',
+        tag: 'ST-03',
         title: 'Futures',
         description:
           'A type of derivative contract agreement to buy or sell a specific commodity asset or security at a set future date for a set price.',
       },
       {
-        tag: 'S-04',
+        tag: 'ST-04',
         title: 'Options',
         description:
           'A type of derivative contract agreement to buy or sell a specific commodity asset or security at a set expiry date for a set price.',
@@ -354,12 +358,12 @@ const sendForexMessage = (options) => {
 
   const buttons = [
     {
-      tag: 'F-01',
-      title: 'Foreign Exchange.',
+      tag: 'FX-01',
+      title: 'Foreign Exchange',
     },
     {
-      tag: 'F-02',
-      title: 'Foreign Currency.',
+      tag: 'FX-02',
+      title: 'Foreign Currency',
     },
   ];
 
