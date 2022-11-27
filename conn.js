@@ -8,14 +8,14 @@ exports.getData = async (data) => {
   const businessId = data.businessId;
   if (sessionId && fromMob && toMob && message) {
     if (message.text.body == "Hii") {
-      const res = { sessionId, from: fromMob, to: toMob, message };
+      const res = { sessionId, from: toMob, to: fromMob, message };
       sendWelcome(res);
     }
   }
 };
 const sendWelcome = (options) => {
   const message = {
-    text: "Hi,Glad to see you here /n Hope you are doing well 😃 /n/n Welcome to the Capital Ninjas😃 /n How may I help you?",
+    text: "Hi,Glad to see you here \n Hope you are doing well 😃.\n Welcome to the Capital Ninjas😃 \n How may I help you?",
   };
   options.message = message;
   whatsapp.sendOneText(options);
