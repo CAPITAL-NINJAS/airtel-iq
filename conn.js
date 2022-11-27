@@ -1,3 +1,4 @@
+const axios = require('axios');
 const whatsapp = require('./whatsapp/whatsapp');
 
 exports.getData = async (data) => {
@@ -25,28 +26,76 @@ exports.getData = async (data) => {
       } else if (message.interactive.list_reply) {
         if (message.interactive.list_reply.title == 'Banking Services') {
           sendBankingServices(res);
+        } else if (
+          message.interactive.list_reply.title == 'Check bank balance'
+        ) {
+          axios({
+            method: 'post',
+            url: 'https://capital-ninjas.onrender.com/api/v1/auth/createOtp',
+            data: {
+              mob_no: fromMob,
+            },
+          })
+            .then((res) => {
+              console.log(res);
+            })
+            .catch((err) => {
+              console.log(err);
+            });
+
+          requestOtp(res);
         }
 
-        if (message.interactive.list_reply.title == 'Financial Services') {
-          sendFinanceServices(res);
-        }
+        // if (message.interactive.list_reply.title == 'Financial Services') {
+        //   sendFinanceServices(res);
+        // }
 
-        if (message.interactive.list_reply.title == 'Insurance Services') {
-          sendInsuranceServices(res);
-        }
+        // if (message.interactive.list_reply.title == 'Insurance Services') {
+        //   sendInsuranceServices(res);
+        // }
 
-        if (message.interactive.list_reply.title == 'Wealth Management') {
-          sendWealthManagement(res);
-        }
+        // if (message.interactive.list_reply.title == 'Wealth Management') {
+        //   sendWealthManagement(res);
+        // }
 
-        if (message.interactive.list_reply.title == 'Stocks') {
-          sendStocksMessage(res);
-        }
+        // if (message.interactive.list_reply.title == 'Stocks') {
+        //   sendStocksMessage(res);
+        // }
 
-        if (message.interactive.list_reply.title == 'Forex') {
-          sendForexMessage(res);
-        }
+        // if (message.interactive.list_reply.title == 'Forex') {
+        //   sendForexMessage(res);
+        // }
       }
+    } else if (message.text.body == /^[0-9]{6}$/) {
+      const otp = message.text.body * 1;
+
+      axios({
+        method: 'post',
+        url: 'https://capital-ninjas.onrender.com/api/v1/auth/verifyOtp',
+        data: {
+          mob_no: fromMob,
+          otp,
+        },
+      })
+        .then((res) => {
+          if (res.status == 'success') {
+            axios({
+              method: 'post',
+              url: `https://capital-ninjas.onrender.com/api/v1/accounts/${fromMob}`,
+            })
+              .then((res) => {
+                if (res.data.status == 'success') {
+                  showBalance(data.data.balance, res);
+                }
+              })
+              .catch((err) => {
+                console.log(err);
+              });
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     }
   }
 };
@@ -371,4 +420,24 @@ const sendForexMessage = (options) => {
   options.buttons = buttons;
 
   whatsapp.sendInteractiveBtn(options);
+};
+
+// Request otp from customer
+const requestOtp = (options) => {
+  const message = {
+    text: 'To get your Bank Balance.\nPlease enter the otp sent to your mobile number',
+  };
+
+  options.message = message;
+  whatsapp.sendOneText(options);
+};
+
+// Send balance to Customer
+const showBalance = (balance, options) => {
+  const message = {
+    text: `Your Balance is : ${balance}`,
+  };
+
+  options.message = message;
+  whatsapp.sendOneText(options);
 };
