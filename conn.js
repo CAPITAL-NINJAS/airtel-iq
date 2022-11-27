@@ -78,7 +78,7 @@ exports.getData = async (data) => {
         },
       })
         .then((res) => {
-          if (res.status == 'success') {
+          if (res.data.status == 'success') {
             axios({
               method: 'post',
               url: `https://capital-ninjas.onrender.com/api/v1/accounts/${fromMob.slice(
