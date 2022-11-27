@@ -4,6 +4,44 @@ const banking = require('./flow/banking');
 const finance = require('./flow/finance');
 const insurance = require('./flow/insurance');
 
+const welcome_intent = [
+  'hey',
+  'hello',
+  'hi',
+  'Hi',
+  'Hello',
+  'Hey',
+  'hii',
+  'Hii',
+  'Good morning',
+  'Good afternoon ',
+  'Good evening ',
+  'goodmorning',
+  'goodafternoon',
+  'goodevening',
+  'Menu',
+  'menu',
+  'Start',
+  'start',
+  'start bot',
+  'Start bot',
+];
+
+const stop_intent = [
+  'stop',
+  'Stop',
+  'end',
+  'End',
+  'bye',
+  'Bye',
+  'stop bot',
+  'Stop bot',
+  'end bot',
+  'End bot',
+  'stop chat',
+  'endchat',
+];
+
 // Get message from user
 exports.getData = async (data) => {
   const sessionId = data.sessionId;
@@ -15,7 +53,7 @@ exports.getData = async (data) => {
     const res = { sessionId, from: toMob, to: fromMob, message };
 
     if (message.text) {
-      if (message.text.body == 'Hii') {
+      if (welcome_intent.contains(message.text.body)) {
         sendWelcome(res);
       } else if (message.text.body.length == 6) {
         const otp = parseInt(message.text.body);
@@ -32,7 +70,8 @@ exports.getData = async (data) => {
         );
 
         if (!otpRes) {
-          return new Error('Otp not matched');
+          sendErrorReply(res);
+          sendWelcome(res);
         }
 
         console.log(otpRes);
@@ -49,7 +88,8 @@ exports.getData = async (data) => {
           console.log(balanceRes);
 
           if (!balanceRes) {
-            return new Error('Please try again');
+            sendErrorReply(res);
+            sendWelcome(res);
           }
 
           banking.showBalance(balanceRes.balance, res);
@@ -78,13 +118,12 @@ exports.getData = async (data) => {
             },
           })
             .then((res) => {
-              console.log(res);
+              banking.requestOtp(res);
             })
             .catch((err) => {
-              console.log(err);
+              sendErrorReply(res);
+              sendWelcome(res);
             });
-
-          banking.requestOtp(res);
         } else if (
           message.interactive.list_reply.title == 'Financial Services'
         ) {
@@ -139,7 +178,17 @@ const sendWelcome = (options) => {
 // Send English Button Reply
 const sendEnglishReply = (options) => {
   const message = {
-    text: `Great how may I help you`,
+    text: 'Great how may I help you',
+  };
+
+  options.message = message;
+  whatsapp.sendOneText(options);
+};
+
+// Send Error Response to user
+const sendErrorReply = (options) => {
+  const message = {
+    text: 'Sorry I cannot understand this command\n\nPlease choose from the below menu 👇',
   };
 
   options.message = message;

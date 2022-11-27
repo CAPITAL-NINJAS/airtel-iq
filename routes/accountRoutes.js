@@ -3,8 +3,7 @@ const accountController = require('./../controllers/accountController');
 
 const router = express.Router();
 
-router.get('/getBalance', accountController.getBalance);
-
+router.post('/getBalance', accountController.getBalance);
 router.get('/getmini/:mob_no', accountController.getministatement);
 
 router
