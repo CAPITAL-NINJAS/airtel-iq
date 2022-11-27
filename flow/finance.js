@@ -1,3 +1,5 @@
+const whatsapp = require('./../whatsapp/whatsapp');
+
 // Send Financial Services options to customer
 exports.sendFinanceServices = (options) => {
   const message = {
